@@ -15,8 +15,6 @@ public class VeiculoDao {
 
 	private static VeiculoDao instance;
 	private Connection con = ConnectionUtil.getConnection();
-	private static int generatedKey;
-	
 	
 	public static VeiculoDao getInstance() {
 		if (instance == null) {
@@ -27,19 +25,21 @@ public class VeiculoDao {
 	
 	public void cadastrar(Veiculo veiculo){
 		try {
-			String sql = "insert into veiculo (id_funcionario, placa, ano, modelo, cor) values (?, ?, ?, ?, ?)";
+			String sql = "insert into veiculo (placa, ano, modelo, cor) values (?, ?, ?, ?)";
 			PreparedStatement pstmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			pstmt.setInt(1, veiculo.getFuncionario().getId());
-			pstmt.setString(2, veiculo.getPlaca());
-			pstmt.setInt(3, veiculo.getAno());
-			pstmt.setString(4, veiculo.getModelo());
-			pstmt.setString(5, veiculo.getCor());
-			pstmt.execute();
+			pstmt.setString(1, veiculo.getPlaca());
+			pstmt.setInt(2, veiculo.getAno());
+			pstmt.setString(3, veiculo.getModelo());
+			pstmt.setString(4, veiculo.getCor());
+
+			int generatedKey = 	pstmt.executeUpdate();
 			
-			ResultSet rs = pstmt.getGeneratedKeys();
-			generatedKey = 0;
-			if (rs.next()) {
+			if (generatedKey > 0) {
+				ResultSet rs = pstmt.getGeneratedKeys();
+				rs.next();
 			    generatedKey = rs.getInt(1);
+			    veiculo.setId(generatedKey);
+			    System.out.println(veiculo.getId());
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -55,9 +55,9 @@ public class VeiculoDao {
 			pstmt.setInt(3, veiculo.getAno());
 			pstmt.setString(4, veiculo.getModelo());
 			pstmt.setString(5, veiculo.getCor());
-			pstmt.setInt(6, generatedKey);
+			pstmt.setInt(6, veiculo.getId());
 			pstmt.executeUpdate();
-			System.out.println("Veiculo Key: " + generatedKey);
+			System.out.println("Veiculo Key: " + veiculo.getId());
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}

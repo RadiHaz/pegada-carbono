@@ -21,37 +21,32 @@ public class Main {
 		Funcionario f = new Funcionario();
 		Veiculo v = new Veiculo();
 
-		v.setModelo("M8X00B-FOCUS");
-		v.setAno(2020);
-		v.setCor("Prata");
-		v.setPlaca("XNX-9009");
-		
-		f.setNome("Melvin");
-		f.setEmail("Melziv@gmail.com");
-		f.setTelefone("554176435519");
-		f.setCpf("005119810-91");
-		f.setRg("5550033");
-		f.setVeiculo(v);
-		v.setFuncionario(f);
-		
-		LocalDate data = LocalDate.now();
-		c.setEndereco("Rua Ramal Florido, 97");
-		c.setDistancia(11.2);
-		c.setFuncionario(f);
-		c.setVeiculo(v);
-		c.setData(data);
-		
 		try {
-//			veiculo.deletar(4);
-//			veiculo.deletar(5);
-//			veiculo.deletar(6);
+//			v.setModelo("M8X0d-FOCUS");
+//			v.setAno(2020);
+//			v.setCor("Prata");
+//			v.setPlaca("ZVX-1001");
+//			veiculo.cadastrar(v);
 //			
-//			funcionario.deletar(4);
-//			funcionario.deletar(5);
-//			funcionario.deletar(6);
+//			f.setNome("Jackers");
+//			f.setEmail("Jamiejackes@gmail.com");
+//			f.setTelefone("telefone4");
+//			f.setCpf("cpf4");
+//			f.setRg("rg4");
+//			f.setVeiculo(v);
+//			funcionario.cadastrar(f);
+//			v.setFuncionario(f);
+//			veiculo.atualizar(v);
 //			
-//			chamado.deletar(8);
-			veiculo.cadastrar(v);
+//			LocalDate data = LocalDate.now();
+//			c.setEndereco("Rua Ramal Florido, 97");
+//			c.setDistancia(11.2);
+//			c.setFuncionario(f);
+//			c.setVeiculo(v);
+//			c.setData(data);
+//			chamado.cadastrar(c);
+			chamado.deletar(10);
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

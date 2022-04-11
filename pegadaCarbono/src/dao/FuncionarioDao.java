@@ -14,7 +14,6 @@ public class FuncionarioDao {
 	
 	private static FuncionarioDao instance;
 	private Connection con = ConnectionUtil.getConnection();
-	private static int generatedKey;
 	
 	public static FuncionarioDao getInstance() {
 		// Singleton //
@@ -26,22 +25,24 @@ public class FuncionarioDao {
 	
 	public void cadastrar(Funcionario funcionario){
 		try {
-			String sql = "insert into funcionario (nome, email, telefone, cpf, rg) values (?, ?, ?, ?, ?)";
+			String sql = "insert into funcionario (nome, email, telefone, cpf, rg, id_veiculo) values (?, ?, ?, ?, ?, ?)";
 			PreparedStatement pstmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			pstmt.setString(1, funcionario.getNome());
 			pstmt.setString(2, funcionario.getEmail());
 			pstmt.setString(3, funcionario.getTelefone());
 			pstmt.setString(4, funcionario.getCpf());
 			pstmt.setString(5, funcionario.getRg());
-			pstmt.execute();
+			pstmt.setInt(6, funcionario.getVeiculo().getId());
 			
-			ResultSet rs = pstmt.getGeneratedKeys();
-			generatedKey = 0;
-			if (rs.next()) {
+			int generatedKey = 	pstmt.executeUpdate();
+			
+			if (generatedKey > 0) {
+				ResultSet rs = pstmt.getGeneratedKeys();
+				rs.next();
 			    generatedKey = rs.getInt(1);
+			    funcionario.setId(generatedKey);
+			    System.out.println(funcionario.getId());
 			}
-			
-			System.out.println(generatedKey);
 			
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -58,7 +59,7 @@ public class FuncionarioDao {
 			pstmt.setString(4, funcionario.getCpf());
 			pstmt.setString(5, funcionario.getRg());
 			pstmt.setInt(6, funcionario.getVeiculo().getId());
-			pstmt.setInt(6, generatedKey);
+			pstmt.setInt(7, funcionario.getId());
 			pstmt.executeUpdate();
 			
 		} catch(SQLException e) {
@@ -98,8 +99,5 @@ public class FuncionarioDao {
 			e.printStackTrace();
 		}
 		return listaFuncionarios;
-	}
-	public static int getKey() {
-		return generatedKey;
 	}
 }

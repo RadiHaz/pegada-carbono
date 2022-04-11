@@ -26,13 +26,22 @@ public class ChamadoDao {
 	public void cadastrar(Chamado chamado){
 		try {
 			String sql = "insert into chamado (endereco, distancia, id_funcionario, id_veiculo, data) values (?, ?, ?, ?, ?)";
-			PreparedStatement pstmt = con.prepareStatement(sql);
+			PreparedStatement pstmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			pstmt.setString(1, chamado.getEndereco());
 			pstmt.setDouble(2, chamado.getDistancia());
 			pstmt.setInt(3, chamado.getFuncionario().getId());
 			pstmt.setInt(4, chamado.getVeiculo().getId());
 			pstmt.setDate(5, java.sql.Date.valueOf(chamado.getData()));
-			pstmt.execute();
+			
+			int generatedKey = 	pstmt.executeUpdate();
+			
+			if (generatedKey > 0) {
+				ResultSet rs = pstmt.getGeneratedKeys();
+				rs.next();
+			    generatedKey = rs.getInt(1);
+			    chamado.setId(generatedKey);
+			    System.out.println(chamado.getId());
+			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
