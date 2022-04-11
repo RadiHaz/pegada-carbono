@@ -73,4 +73,5 @@ public class Funcionario {
 	public void setTelefone(String contato) {
 		this.telefone = contato;
 	}
+
 }
