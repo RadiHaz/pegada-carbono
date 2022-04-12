@@ -12,7 +12,6 @@ import model.Veiculo;
 import util.ConnectionUtil;
 
 public class VeiculoDao {
-
 	private static VeiculoDao instance;
 	private Connection con = ConnectionUtil.getConnection();
 	
@@ -39,7 +38,7 @@ public class VeiculoDao {
 				rs.next();
 			    generatedKey = rs.getInt(1);
 			    veiculo.setId(generatedKey);
-			    System.out.println(veiculo.getId());
+			    System.out.println("Veiculo: " + veiculo.getId());
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -57,7 +56,7 @@ public class VeiculoDao {
 			pstmt.setString(5, veiculo.getCor());
 			pstmt.setInt(6, veiculo.getId());
 			pstmt.executeUpdate();
-			System.out.println("Veiculo Key: " + veiculo.getId());
+			System.out.println("Veiculo Key update: " + veiculo.getId());
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
@@ -83,7 +82,6 @@ public class VeiculoDao {
 			while (rs.next()) {
 				Veiculo v = new Veiculo();
 				v.setId(rs.getInt("id"));
-				v.getFuncionario().setId(rs.getInt("id_funcionario"));
 				v.setPlaca(rs.getString("placa"));
 				v.setAno(rs.getInt("ano"));
 				v.setModelo(rs.getString("modelo"));

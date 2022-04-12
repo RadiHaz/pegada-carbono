@@ -25,13 +25,12 @@ public class ChamadoDao {
 	
 	public void cadastrar(Chamado chamado){
 		try {
-			String sql = "insert into chamado (endereco, distancia, id_funcionario, id_veiculo, data) values (?, ?, ?, ?, ?)";
+			
+			String sql = "insert into chamado (distancia, id_funcionario, data) values (?, ?, ?)";
 			PreparedStatement pstmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			pstmt.setString(1, chamado.getEndereco());
-			pstmt.setDouble(2, chamado.getDistancia());
-			pstmt.setInt(3, chamado.getFuncionario().getId());
-			pstmt.setInt(4, chamado.getVeiculo().getId());
-			pstmt.setDate(5, java.sql.Date.valueOf(chamado.getData()));
+			pstmt.setDouble(1, chamado.getDistancia());
+			pstmt.setInt(2, chamado.getFuncionario().getId());
+			pstmt.setDate(3, java.sql.Date.valueOf(chamado.getData()));
 			
 			int generatedKey = 	pstmt.executeUpdate();
 			
@@ -40,9 +39,8 @@ public class ChamadoDao {
 				rs.next();
 			    generatedKey = rs.getInt(1);
 			    chamado.setId(generatedKey);
-			    System.out.println(chamado.getId());
+			    System.out.println("Chamado Key: " + chamado.getId());
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -51,16 +49,14 @@ public class ChamadoDao {
 	public void atualizar(Chamado chamado) {
 		try {
 			
-			String sql = "update chamado set endereco = ?, distancia = ?, id_funcionario = ?, id_veiculo = ?, data = ? where id = ?";
+			String sql = "update chamado set distancia = ?, id_funcionario = ?, data = ? where id = ?";
 			PreparedStatement pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, chamado.getEndereco());
-			pstmt.setDouble(2, chamado.getDistancia());
-			pstmt.setInt(3, chamado.getFuncionario().getId());
-			pstmt.setInt(4, chamado.getVeiculo().getId());
-			pstmt.setDate(5, java.sql.Date.valueOf(chamado.getData()));
-			pstmt.setInt(6, chamado.getId());
-			
+			pstmt.setDouble(1, chamado.getDistancia());
+			pstmt.setInt(2, chamado.getFuncionario().getId());
+			pstmt.setDate(3, java.sql.Date.valueOf(chamado.getData()));
+			pstmt.setInt(4, chamado.getId());
 			pstmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -83,13 +79,10 @@ public class ChamadoDao {
 			String sql = "select * from chamado";
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
-			while (rs.next()) {
-				Chamado c = new Chamado();
+			Chamado c = new Chamado();
+			while (rs.next()) {	
 				c.setId(rs.getInt("id"));
-				c.setEndereco(rs.getString("endereco"));
 				c.setDistancia(rs.getDouble("distancia"));
-				c.getFuncionario().setId(rs.getInt("id_funcionario"));
-				c.getVeiculo().setId(rs.getInt("id_veiculo"));
 				c.setData(rs.getDate("data").toLocalDate());
 				listaChamados.add(c);
 			}

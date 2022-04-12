@@ -25,14 +25,13 @@ public class FuncionarioDao {
 	
 	public void cadastrar(Funcionario funcionario){
 		try {
-			String sql = "insert into funcionario (nome, email, telefone, cpf, rg, id_veiculo) values (?, ?, ?, ?, ?, ?)";
+			String sql = "insert into funcionario (nome, email, telefone, cpf, id_veiculo) values (?, ?, ?, ?, ?)";
 			PreparedStatement pstmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			pstmt.setString(1, funcionario.getNome());
 			pstmt.setString(2, funcionario.getEmail());
 			pstmt.setString(3, funcionario.getTelefone());
 			pstmt.setString(4, funcionario.getCpf());
-			pstmt.setString(5, funcionario.getRg());
-			pstmt.setInt(6, funcionario.getVeiculo().getId());
+			pstmt.setInt(5, funcionario.getVeiculo().getId());
 			
 			int generatedKey = 	pstmt.executeUpdate();
 			
@@ -41,7 +40,7 @@ public class FuncionarioDao {
 				rs.next();
 			    generatedKey = rs.getInt(1);
 			    funcionario.setId(generatedKey);
-			    System.out.println(funcionario.getId());
+			    System.out.println("Funcionario: " + funcionario.getId());
 			}
 			
 		} catch(SQLException e) {
@@ -51,15 +50,14 @@ public class FuncionarioDao {
 
 	public void atualizar(Funcionario funcionario) {
 		try {
-			String sql = "update funcionario set nome = ?, email = ?, telefone = ?, cpf = ?, rg = ?, id_veiculo = ? where id = ?";
+			String sql = "update funcionario set nome = ?, email = ?, telefone = ?, cpf = ?, id_veiculo = ? where id = ?";
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, funcionario.getNome());
 			pstmt.setString(2, funcionario.getEmail());
 			pstmt.setString(3, funcionario.getTelefone());
 			pstmt.setString(4, funcionario.getCpf());
-			pstmt.setString(5, funcionario.getRg());
-			pstmt.setInt(6, funcionario.getVeiculo().getId());
-			pstmt.setInt(7, funcionario.getId());
+			pstmt.setInt(5, funcionario.getVeiculo().getId());
+			pstmt.setInt(6, funcionario.getId());
 			pstmt.executeUpdate();
 			
 		} catch(SQLException e) {
@@ -91,8 +89,6 @@ public class FuncionarioDao {
 				f.setEmail(rs.getString("email"));
 				f.setTelefone(rs.getString("telefone"));
 				f.setCpf(rs.getString("cpf"));
-				f.setRg(rs.getString("rg"));
-				f.getVeiculo().setId(rs.getInt("id_veiculo"));
 				listaFuncionarios.add(f);
 			}
 		} catch(SQLException e) {

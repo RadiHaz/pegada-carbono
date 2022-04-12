@@ -6,7 +6,6 @@ public class Funcionario {
 	private String email;
 	private String telefone;
 	private String cpf;
-	private String rg;
 	private Veiculo veiculo;	
 	
 	public Funcionario(String nome, String cpf) {
@@ -57,15 +56,7 @@ public class Funcionario {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	
-	public String getRg() {
-		return rg;
-	}
-	
-	public void setRg(String rg) {
-		this.rg = rg;
-	}
-	
+
 	public String getTelefone() {
 		return this.telefone;
 	}

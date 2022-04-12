@@ -3,16 +3,12 @@ import java.time.LocalDate;
 
 public class Chamado {
 	private int id;
-	private String endereco;
 	private Double distancia;
 	private Funcionario funcionario;
-	private Veiculo veiculo;
 	private LocalDate data;
-	private Double pegadaDeCarbono;
 		
-	public Chamado(Funcionario funcionario, Veiculo veiculo, Double distancia) {
+	public Chamado(Funcionario funcionario, Double distancia) {
 		this.funcionario = funcionario;
-		this.veiculo = veiculo;
 		this.distancia = distancia;
 	}
 
@@ -26,14 +22,6 @@ public class Chamado {
 	
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
 	}
 
 	public Double getDistancia() {
@@ -52,28 +40,12 @@ public class Chamado {
 		this.funcionario = funcionario;
 	}
 
-	public Veiculo getVeiculo() {
-		return veiculo;
-	}
-
-	public void setVeiculo(Veiculo veiculo) {
-		this.veiculo = veiculo;
-	}
-	
 	public LocalDate getData() {
 		return this.data;
 	}
 	
 	public void setData(LocalDate data) {
 		this.data = data;
-	}
-	
-	public Double getPegadaDeCarbono() {
-		return pegadaDeCarbono;
-	}
-	
-	public void setPegadaDeCarbono(Double pegadaDeCarbono) {
-		this.pegadaDeCarbono = pegadaDeCarbono;
 	}
 
 }

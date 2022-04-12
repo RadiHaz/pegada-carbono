@@ -8,9 +8,6 @@ import dao.ChamadoDao;
 public class ChamadoController {
 	
 	public void cadastrar(Chamado chamado) throws Exception{
-		if (chamado.getEndereco() == null) {
-			throw new Exception("Endereco inválido");
-		}
 		ChamadoDao.getInstance().cadastrar(chamado);
 	}
 
