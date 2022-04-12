@@ -66,5 +66,14 @@ public class Veiculo {
 		this.funcionario = funcionario;
 	}
 	
+	@Override
+	public String toString() {
+		return "ID do veiculo: " + id
+				+ "\nPertence ao Funcionrio " + this.funcionario.getNome() + " de ID: " + this.funcionario.getId()
+				+ "\nModelo: " + this.modelo
+				+ "\nAno: " + this.ano
+				+ "\nPlaca: " + this.placa
+				+ "\nCor: " + this.cor;
+	}
 	
 }

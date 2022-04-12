@@ -28,13 +28,13 @@ public class Main {
 			v.setModelo("M8X0d-FOCUS");
 			v.setAno(2020);
 			v.setCor("Prata");
-			v.setPlaca("ZVX-1001");
+			v.setPlaca("ZBX-1201");
 			veiculo.cadastrar(v);
 			
-			f.setNome("Jackers");
-			f.setEmail("Jamiejackes@gmail.com");
-			f.setTelefone("telefone4");
-			f.setCpf("cpf4");
+			f.setNome("Jackedrs");
+			f.setEmail("Jamiejacdskes@gmail.com");
+			f.setTelefone("telefoned4");
+			f.setCpf("cpfa4");
 			f.setVeiculo(v);
 			funcionario.cadastrar(f);
 			v.setFuncionario(f);
@@ -46,13 +46,7 @@ public class Main {
 			c.setData(data);
 			chamado.cadastrar(c);
 			
-			List<Chamado> chamadoLista = chamado.listar().stream().collect(Collectors.toList());
-			List<Funcionario> funcionarioLista = new ArrayList<>();
-			List<Veiculo> veiculoLista = new ArrayList<>();
-			System.out.println(chamadoLista);
-			System.out.println(funcionarioLista);
-			System.out.println(veiculoLista);
-			
+			System.out.println(funcionario.listar());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

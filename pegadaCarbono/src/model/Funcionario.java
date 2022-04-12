@@ -64,5 +64,14 @@ public class Funcionario {
 	public void setTelefone(String contato) {
 		this.telefone = contato;
 	}
+	
+	@Override
+	public String toString() {
+		return "id nome email cpf veiculo" + this.id
+				+ "Nome: " + this.nome
+				+ "\nEmail: " + this.email
+				+ "\nCPF: " + this.cpf
+				+ "\nID Veiculo: " + this.getVeiculo().getId();
+	}
 
 }

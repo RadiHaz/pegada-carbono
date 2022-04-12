@@ -47,5 +47,16 @@ public class Chamado {
 	public void setData(LocalDate data) {
 		this.data = data;
 	}
-
+	
+	@Override
+	public String toString() {
+		return "Chamado id: "
+				+ this.id
+				+ "\nFuncionario id: "
+				+ funcionario.getId()
+				+ "\nVeiculo id: "
+				+ funcionario.getVeiculo().getId()
+				+ "\nData: "
+				+ this.data;
+	}
 }
