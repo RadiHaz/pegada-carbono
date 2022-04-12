@@ -3,9 +3,6 @@ package model;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import controller.ChamadoController;
 import controller.FuncionarioController;
@@ -46,6 +43,8 @@ public class Main {
 			c.setData(data);
 			chamado.cadastrar(c);
 			
+			System.out.println(chamado.listar());
+			System.out.println(veiculo.listar());
 			System.out.println(funcionario.listar());
 		} catch (SQLException e) {
 			e.printStackTrace();

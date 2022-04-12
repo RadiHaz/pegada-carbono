@@ -39,7 +39,6 @@ public class ChamadoDao {
 				rs.next();
 			    generatedKey = rs.getInt(1);
 			    chamado.setId(generatedKey);
-			    System.out.println("Chamado Key: " + chamado.getId());
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -91,5 +90,4 @@ public class ChamadoDao {
 		}
 		return listaChamados;
 	}
-
 }

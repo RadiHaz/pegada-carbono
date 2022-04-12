@@ -40,7 +40,6 @@ public class FuncionarioDao {
 				rs.next();
 			    generatedKey = rs.getInt(1);
 			    funcionario.setId(generatedKey);
-			    System.out.println("Funcionario: " + funcionario.getId());
 			}
 			
 		} catch(SQLException e) {

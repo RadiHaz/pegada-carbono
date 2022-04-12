@@ -50,13 +50,9 @@ public class Chamado {
 	
 	@Override
 	public String toString() {
-		return "Chamado id: "
-				+ this.id
-				+ "\nFuncionario id: "
-				+ funcionario.getId()
-				+ "\nVeiculo id: "
-				+ funcionario.getVeiculo().getId()
+		return "ID Chamado: "
+				+ id
 				+ "\nData: "
-				+ this.data;
+				+ data;
 	}
 }

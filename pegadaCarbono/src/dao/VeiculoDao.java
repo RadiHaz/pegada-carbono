@@ -38,7 +38,6 @@ public class VeiculoDao {
 				rs.next();
 			    generatedKey = rs.getInt(1);
 			    veiculo.setId(generatedKey);
-			    System.out.println("Veiculo: " + veiculo.getId());
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -56,7 +55,6 @@ public class VeiculoDao {
 			pstmt.setString(5, veiculo.getCor());
 			pstmt.setInt(6, veiculo.getId());
 			pstmt.executeUpdate();
-			System.out.println("Veiculo Key update: " + veiculo.getId());
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}

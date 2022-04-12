@@ -67,11 +67,9 @@ public class Funcionario {
 	
 	@Override
 	public String toString() {
-		return "id nome email cpf veiculo" + this.id
-				+ "Nome: " + this.nome
-				+ "\nEmail: " + this.email
-				+ "\nCPF: " + this.cpf
-				+ "\nID Veiculo: " + this.getVeiculo().getId();
+		return "ID Funcionario: " + id
+				+ "\nNome: " + nome
+				+ "\nEmail: " + email
+				+ "\nCPF: " + cpf;
 	}
-
 }
