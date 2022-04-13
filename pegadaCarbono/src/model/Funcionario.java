@@ -6,7 +6,7 @@ public class Funcionario {
 	private String email;
 	private String telefone;
 	private String cpf;
-	private Veiculo veiculo;	
+	private Boolean habilitado;
 	
 	public Funcionario(String nome, String cpf) {
 		this.nome = nome;
@@ -40,14 +40,6 @@ public class Funcionario {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	public Veiculo getVeiculo() {
-		return veiculo;
-	}
-	
-	public void setVeiculo(Veiculo veiculo) {
-		this.veiculo = veiculo;
-	}
 
 	public String getCpf() {
 		return cpf;
@@ -55,6 +47,14 @@ public class Funcionario {
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
+	}
+
+	public Boolean getHabilitado() {
+		return habilitado;
+	}
+
+	public void setHabilitado(Boolean habilitado) {
+		this.habilitado = habilitado;
 	}
 
 	public String getTelefone() {
@@ -70,6 +70,7 @@ public class Funcionario {
 		return "ID Funcionario: " + id
 				+ "\nNome: " + nome
 				+ "\nEmail: " + email
-				+ "\nCPF: " + cpf;
+				+ "\nCPF: " + cpf
+				+ "\nHabilitado: " + habilitado	;
 	}
 }

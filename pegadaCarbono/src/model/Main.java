@@ -32,9 +32,8 @@ public class Main {
 			f.setEmail("Jamiejacdskes@gmail.com");
 			f.setTelefone("telefoned4");
 			f.setCpf("cpfa4");
-			f.setVeiculo(v);
+			
 			funcionario.cadastrar(f);
-			v.setFuncionario(f);
 			veiculo.atualizar(v);
 			
 			LocalDate data = LocalDate.now();

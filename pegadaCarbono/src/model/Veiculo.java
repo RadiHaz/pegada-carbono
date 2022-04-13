@@ -2,7 +2,6 @@ package model;
 
 public class Veiculo {
 	private int id;
-	private Funcionario funcionario;
 	private String placa;
 	private int ano;
 	private String modelo;
@@ -56,14 +55,6 @@ public class Veiculo {
 
 	public void setCor(String cor) {
 		this.cor = cor;
-	}
-	
-	public Funcionario getFuncionario() {
-		return funcionario;
-	}
-	
-	public void setFuncionario (Funcionario funcionario) {
-		this.funcionario = funcionario;
 	}
 	
 	@Override

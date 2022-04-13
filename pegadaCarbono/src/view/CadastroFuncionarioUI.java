@@ -17,13 +17,16 @@ import javax.swing.border.TitledBorder;
 
 import controller.FuncionarioController;
 import model.Funcionario;
+import model.Veiculo;
+import javax.swing.JRadioButton;
 
 public class CadastroFuncionarioUI extends JInternalFrame {
 	private JTextField txtEmail;
 	private JTextField txtTelefone;
 	private JTextField txtCpf;
-	private JTextField txtRg;
 	private JTextField txtNome;
+	private CadastroVeiculoUI veiculoUI;
+	private Funcionario funcionario;
 
 	/**
 	 * Launch the application.
@@ -45,25 +48,26 @@ public class CadastroFuncionarioUI extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public CadastroFuncionarioUI() {
+
 		setClosable(true);
 		setTitle("Cadastro de Funcion\u00E1rio");
-		setBounds(100, 100, 342, 242);
+		setBounds(100, 100, 485, 326);
 		
 		JPanel jpCadFuncionario = new JPanel();
 		jpCadFuncionario.setBorder(new TitledBorder(null, "Funcion\u00E1rio", TitledBorder.LEFT, TitledBorder.TOP, null, null));
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(jpCadFuncionario, GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
+					.addComponent(jpCadFuncionario, GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE)
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
+			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addComponent(jpCadFuncionario, GroupLayout.PREFERRED_SIZE, 191, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap()
+					.addComponent(jpCadFuncionario, GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
 					.addContainerGap())
 		);
 		
@@ -75,7 +79,7 @@ public class CadastroFuncionarioUI extends JInternalFrame {
 		
 		JLabel cadCpf = new JLabel("CPF:");
 		
-		JLabel cadRg = new JLabel("RG:");
+		JLabel lblNewLabel = new JLabel("Habilitado?");
 		
 		txtNome = new JTextField();
 		txtNome.setColumns(10);
@@ -89,25 +93,44 @@ public class CadastroFuncionarioUI extends JInternalFrame {
 		txtCpf = new JTextField();
 		txtCpf.setColumns(10);
 		
-		txtRg = new JTextField();
-		txtRg.setColumns(10);
+		JRadioButton rdNao = new JRadioButton("N\u00E3o");
+		rdNao.setSelected(true);
+		
+		JRadioButton rdSim = new JRadioButton("Sim");
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				Funcionario funcionario = new Funcionario();
-				funcionario.setNome(txtNome.getText());
-				funcionario.setEmail(txtEmail.getText());
-				funcionario.setTelefone(txtTelefone.getText());
-				funcionario.setCpf(txtCpf.getText());
-					
 				try {
+				if (funcionario != null && funcionario.getId() > 0) {
+					funcionario.setNome(txtNome.getText());
+					funcionario.setEmail(txtEmail.getText());
+					funcionario.setTelefone(txtTelefone.getText());
+					funcionario.setCpf(txtCpf.getText());
+					if(rdSim.isSelected()) funcionario.setHabilitado(true);
+					else funcionario.setHabilitado(false);
+					new FuncionarioController().atualizar(funcionario);
+				}
+				else {
+					
+					Funcionario funcionario = new Funcionario();
+					if((txtNome.getText().isEmpty() && txtCpf.getText().isEmpty() && txtEmail.getText().isEmpty()) == false) {
+					funcionario.setNome(txtNome.getText());
+					funcionario.setEmail(txtEmail.getText());
+					funcionario.setTelefone(txtTelefone.getText());
+					funcionario.setCpf(txtCpf.getText());
+					if(rdSim.isSelected()) funcionario.setHabilitado(true);
+					else funcionario.setHabilitado(false);
+					}
+					
 					new FuncionarioController().cadastrar(funcionario);
+					JOptionPane.showMessageDialog(null, "Funcionário cadastrado com sucesso.");
+				}
+				dispose();
 				} catch (Exception e1) {
-					e1.printStackTrace();
 					JOptionPane.showMessageDialog(null, "Erro ao cadastrar funcionário");
 				}
+				
 			}
 		});
 		
@@ -118,42 +141,50 @@ public class CadastroFuncionarioUI extends JInternalFrame {
 				txtEmail.setText("");
 				txtTelefone.setText("");
 				txtCpf.setText("");
-				txtRg.setText("");
 			}
 		});
 
 		JButton btnSair = new JButton("Sair");
 		btnSair.addActionListener(e -> this.dispose());
 		
+		
+		
 		GroupLayout gl_jpCadFuncionario = new GroupLayout(jpCadFuncionario);
 		gl_jpCadFuncionario.setHorizontalGroup(
 			gl_jpCadFuncionario.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_jpCadFuncionario.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_jpCadFuncionario.createParallelGroup(Alignment.LEADING)
-						.addComponent(cadTelefone)
-						.addComponent(cadCpf)
-						.addComponent(cadRg)
-						.addComponent(cadEmail)
-						.addComponent(cadNome)
-						.addComponent(btnCadastrar))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_jpCadFuncionario.createParallelGroup(Alignment.LEADING)
-						.addComponent(txtNome, 187, 187, 187)
-						.addComponent(txtEmail, 187, 187, 187)
-						.addComponent(txtCpf, 187, 187, 187)
-						.addComponent(txtTelefone, GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+					.addGap(71)
+					.addGroup(gl_jpCadFuncionario.createParallelGroup(Alignment.LEADING, false)
 						.addGroup(gl_jpCadFuncionario.createSequentialGroup()
+							.addComponent(btnCadastrar)
+							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(btnLimpar, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnSair, GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE))
-						.addComponent(txtRg, 187, 187, 187))
-					.addContainerGap())
+							.addComponent(btnSair, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addGroup(gl_jpCadFuncionario.createSequentialGroup()
+							.addGroup(gl_jpCadFuncionario.createParallelGroup(Alignment.LEADING)
+								.addComponent(cadTelefone)
+								.addComponent(cadCpf)
+								.addComponent(cadEmail)
+								.addComponent(cadNome)
+								.addComponent(lblNewLabel))
+							.addGap(35)
+							.addGroup(gl_jpCadFuncionario.createParallelGroup(Alignment.TRAILING)
+								.addComponent(txtNome, 187, 187, Short.MAX_VALUE)
+								.addComponent(txtEmail, 187, 187, Short.MAX_VALUE)
+								.addComponent(txtCpf, 187, 187, Short.MAX_VALUE)
+								.addComponent(txtTelefone)
+								.addGroup(gl_jpCadFuncionario.createSequentialGroup()
+									.addComponent(rdSim, GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
+									.addGap(40)
+									.addComponent(rdNao)
+									.addGap(29)))))
+					.addContainerGap(82, Short.MAX_VALUE))
 		);
 		gl_jpCadFuncionario.setVerticalGroup(
 			gl_jpCadFuncionario.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_jpCadFuncionario.createSequentialGroup()
-					.addContainerGap()
+					.addGap(40)
 					.addGroup(gl_jpCadFuncionario.createParallelGroup(Alignment.BASELINE)
 						.addComponent(cadNome)
 						.addComponent(txtNome, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
@@ -171,17 +202,32 @@ public class CadastroFuncionarioUI extends JInternalFrame {
 						.addComponent(txtCpf, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_jpCadFuncionario.createParallelGroup(Alignment.BASELINE)
-						.addComponent(cadRg)
-						.addComponent(txtRg, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
+						.addComponent(lblNewLabel)
+						.addComponent(rdNao)
+						.addComponent(rdSim))
+					.addPreferredGap(ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
 					.addGroup(gl_jpCadFuncionario.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnCadastrar)
 						.addComponent(btnLimpar)
 						.addComponent(btnSair))
-					.addContainerGap(14, Short.MAX_VALUE))
+					.addContainerGap())
 		);
 		jpCadFuncionario.setLayout(gl_jpCadFuncionario);
 		getContentPane().setLayout(groupLayout);
 
+	}
+
+	public void setFuncionarioEdicao(Funcionario funcionario) {
+		// TODO Auto-generated method stub
+		this.funcionario = funcionario;		
+		preencheFormulario();
+	}
+	private void preencheFormulario() {
+		if (funcionario != null) {
+			txtNome.setText(funcionario.getNome());
+			txtEmail.setText(funcionario.getEmail());
+			txtTelefone.setText(funcionario.getTelefone());
+			txtCpf.setText(funcionario.getCpf());
+		}
 	}
 }

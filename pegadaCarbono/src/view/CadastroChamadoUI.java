@@ -15,12 +15,13 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 
 public class CadastroChamadoUI extends JInternalFrame {
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField txtDistancia;
+	private JTextField txtData;
 
 	/**
 	 * Launch the application.
@@ -42,6 +43,7 @@ public class CadastroChamadoUI extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public CadastroChamadoUI() {
+		setClosable(true);
 		setTitle("Cadastro de Chamado");
 		setBounds(100, 100, 360, 200);
 		
@@ -63,33 +65,40 @@ public class CadastroChamadoUI extends JInternalFrame {
 					.addContainerGap(12, Short.MAX_VALUE))
 		);
 		
-		JLabel lblNewLabel = new JLabel("Funcion\u00E1rio:");
+		JLabel chamadoFuncionario = new JLabel("Funcion\u00E1rio:");
 		
-		JLabel lblNewLabel_3 = new JLabel("Dist\u00E2ncia:");
+		JLabel chamadoDistancia = new JLabel("Dist\u00E2ncia:");
 		
-		JLabel lblNewLabel_2 = new JLabel("Data:");
+		JLabel chamadoData = new JLabel("Data:");
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
+		txtDistancia = new JTextField();
+		txtDistancia.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
+		txtData = new JTextField();
+		txtData.setColumns(10);
+		
+		JComboBox comboFuncionario = new JComboBox();
 		
 		JButton btnNewButton = new JButton("Cadastrar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Chamado chamado = new Chamado();
-				chamado.setDistancia(null);
+				chamado.setDistancia(Double.parseDouble(txtDistancia.getText()));
 				chamado.setFuncionario(null);
-				chamado.setData(null);
+				chamado.setData(LocalDate.now());
 			}
 		});
 		
-		JButton btnNewButton_1 = new JButton("New button");
+		JButton btnLimpar = new JButton("Limpar");
+		btnLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				txtDistancia.setText("");
+			}
+		});
 		
-		JButton btnNewButton_2 = new JButton("New button");
+		JButton btnNewButton_2 = new JButton("Sair");
 		
-		JComboBox comboBox = new JComboBox();
+		
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -98,20 +107,20 @@ public class CadastroChamadoUI extends JInternalFrame {
 					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
-								.addComponent(lblNewLabel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(lblNewLabel_3, Alignment.LEADING)
-								.addComponent(lblNewLabel_2, Alignment.LEADING))
+								.addComponent(chamadoFuncionario, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(chamadoDistancia, Alignment.LEADING)
+								.addComponent(chamadoData, Alignment.LEADING))
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
-								.addComponent(textField_2, GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
-								.addComponent(comboBox, 0, 128, Short.MAX_VALUE)))
+								.addComponent(txtDistancia, GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+								.addComponent(txtData, GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+								.addComponent(comboFuncionario, 0, 192, Short.MAX_VALUE)))
 						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+							.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
+							.addComponent(btnLimpar, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(btnNewButton_2)
+							.addComponent(btnNewButton_2, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)))
 					.addGap(95))
 		);
@@ -120,20 +129,20 @@ public class CadastroChamadoUI extends JInternalFrame {
 				.addGroup(gl_panel.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel)
-						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(chamadoFuncionario)
+						.addComponent(comboFuncionario, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel_3)
-						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(chamadoDistancia)
+						.addComponent(txtDistancia, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel_2)
-						.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(chamadoData)
+						.addComponent(txtData, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnNewButton)
-						.addComponent(btnNewButton_1)
+						.addComponent(btnLimpar)
 						.addComponent(btnNewButton_2))
 					.addContainerGap())
 		);

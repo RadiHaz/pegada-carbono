@@ -23,7 +23,7 @@ public class ChamadoDao {
 		return instance;
 	}
 	
-	public void cadastrar(Chamado chamado){
+	public void cadastrar(Chamado chamado){	
 		try {
 			
 			String sql = "insert into chamado (distancia, id_funcionario, data) values (?, ?, ?)";
@@ -63,10 +63,12 @@ public class ChamadoDao {
 	
 	public void deletar(int idChamado) {
 		try {
+			
 			String sql = "delete from chamado where id = ?";
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, idChamado);
 			pstmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
