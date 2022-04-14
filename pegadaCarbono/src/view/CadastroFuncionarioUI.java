@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
@@ -11,21 +12,19 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.TitledBorder;
 
 import controller.FuncionarioController;
 import model.Funcionario;
-import model.Veiculo;
-import javax.swing.JRadioButton;
 
 public class CadastroFuncionarioUI extends JInternalFrame {
 	private JTextField txtEmail;
 	private JTextField txtTelefone;
 	private JTextField txtCpf;
 	private JTextField txtNome;
-	private CadastroVeiculoUI veiculoUI;
 	private Funcionario funcionario;
 
 	/**
@@ -93,11 +92,13 @@ public class CadastroFuncionarioUI extends JInternalFrame {
 		txtCpf = new JTextField();
 		txtCpf.setColumns(10);
 		
+		ButtonGroup btnGroup = new ButtonGroup();
+		
 		JRadioButton rdNao = new JRadioButton("N\u00E3o");
-		rdNao.setSelected(true);
-		
 		JRadioButton rdSim = new JRadioButton("Sim");
-		
+		rdSim.setSelected(true);
+		btnGroup.add(rdSim);
+		btnGroup.add(rdNao);
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -124,7 +125,7 @@ public class CadastroFuncionarioUI extends JInternalFrame {
 					}
 					
 					new FuncionarioController().cadastrar(funcionario);
-					JOptionPane.showMessageDialog(null, "Funcionário cadastrado com sucesso.");
+					JOptionPane.showMessageDialog(null, "Funcionário cadastrado com sucesso");
 				}
 				dispose();
 				} catch (Exception e1) {

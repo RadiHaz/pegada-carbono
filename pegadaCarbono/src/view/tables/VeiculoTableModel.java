@@ -31,7 +31,7 @@ public class VeiculoTableModel extends AbstractTableModel{
 
 	public String getColumnName(int column) {
 		//Qual é o PLACA das nossas colunas?
-		if (column == COL_PLACA) return "PLACA";
+		if (column == COL_PLACA) return "Placa";
 		return ""; //Nunca deve ocorrer
 	}
 

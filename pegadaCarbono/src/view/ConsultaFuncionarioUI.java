@@ -41,10 +41,10 @@ public class ConsultaFuncionarioUI extends JInternalFrame {
 	 */
 	public ConsultaFuncionarioUI() {
 		setTitle("Consulta de Funcion\u00E1rio");
-		setBounds(100, 100, 739, 336);
+		setBounds(100, 100, 739, 271);
 		
-		JButton btnNewButton = new JButton("Editar");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnEditar = new JButton("Editar");
+		btnEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Funcionario funcionario = new FuncionarioTableModel(new FuncionarioController().listar()).get(jtFuncionario.getSelectedRow());
 				try {
@@ -58,8 +58,8 @@ public class ConsultaFuncionarioUI extends JInternalFrame {
 			}
 		});
 		
-		JButton btnNewButton_1 = new JButton("Excluir");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton btnExcluir = new JButton("Excluir");
+		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Funcionario funcionario = new FuncionarioTableModel(new FuncionarioController().listar()).get(jtFuncionario.getSelectedRow());
 				try {
@@ -71,8 +71,8 @@ public class ConsultaFuncionarioUI extends JInternalFrame {
 			}
 		});
 		
-		JButton btnNewButton_2 = new JButton("Sair");
-		btnNewButton_2.addActionListener(new ActionListener() {
+		JButton btnSair = new JButton("Sair");
+		btnSair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 			}
@@ -80,8 +80,8 @@ public class ConsultaFuncionarioUI extends JInternalFrame {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		
-		JButton btnNewButton_3 = new JButton("Atualizar");
-		btnNewButton_3.addActionListener(new ActionListener() {
+		JButton btnAtualizar = new JButton("Atualizar");
+		btnAtualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				jtFuncionario.setModel(new FuncionarioTableModel(new FuncionarioController().listar()));
 			}
@@ -94,13 +94,13 @@ public class ConsultaFuncionarioUI extends JInternalFrame {
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 689, GroupLayout.PREFERRED_SIZE)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(btnNewButton)
+							.addComponent(btnEditar)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnNewButton_1)
+							.addComponent(btnExcluir)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnNewButton_3)
+							.addComponent(btnAtualizar)
 							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(btnNewButton_2)))
+							.addComponent(btnSair)))
 					.addContainerGap(16, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
@@ -110,10 +110,10 @@ public class ConsultaFuncionarioUI extends JInternalFrame {
 					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnNewButton_2, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnNewButton_3, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
+						.addComponent(btnEditar, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnExcluir, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnSair, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnAtualizar, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap(92, Short.MAX_VALUE))
 		);
 		

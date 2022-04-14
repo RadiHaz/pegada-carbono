@@ -22,9 +22,6 @@ public class Main {
 		Veiculo v = new Veiculo();
 		
 		try {
-			v.setModelo("M8X0d-FOCUS");
-			v.setAno(2020);
-			v.setCor("Prata");
 			v.setPlaca("ZBX-1201");
 			veiculo.cadastrar(v);
 			

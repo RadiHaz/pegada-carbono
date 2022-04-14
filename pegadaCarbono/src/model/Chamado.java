@@ -5,6 +5,7 @@ public class Chamado {
 	private int id;
 	private Double distancia;
 	private Funcionario funcionario;
+	private Veiculo veiculo;
 	private LocalDate data;
 		
 	public Chamado(Funcionario funcionario, Double distancia) {
@@ -38,6 +39,14 @@ public class Chamado {
 
 	public void setFuncionario(Funcionario funcionario) {
 		this.funcionario = funcionario;
+	}
+
+	public Veiculo getVeiculo() {
+		return veiculo;
+	}
+
+	public void setVeiculo(Veiculo veiculo) {
+		this.veiculo = veiculo;
 	}
 
 	public LocalDate getData() {

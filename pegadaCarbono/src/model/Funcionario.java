@@ -67,10 +67,6 @@ public class Funcionario {
 	
 	@Override
 	public String toString() {
-		return "ID Funcionario: " + id
-				+ "\nNome: " + nome
-				+ "\nEmail: " + email
-				+ "\nCPF: " + cpf
-				+ "\nHabilitado: " + habilitado	;
+		return getNome() + " - " + getTelefone();
 	}
 }
