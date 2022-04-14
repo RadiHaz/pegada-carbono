@@ -142,9 +142,6 @@ public class MainUI extends JFrame {
 			}
 		});
 		mnConsulta.add(mnConVeiculo);
-		
-		JMenu mnTemp = new JMenu("Sobre");
-		menuBarMain.add(mnTemp);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -282,8 +279,8 @@ public class MainUI extends JFrame {
 			}
 		});
 		
-		JLabel lblNewLabel = new JLabel("Ao alterar qualquer dado, n\u00E3o esque\u00E7a de atualizar a tabela com o bot\u00E3o \"Atualizar\".");
-		lblNewLabel.setBackground(Color.RED);
+		JLabel lblNewLabel = new JLabel("Ao alterar qualquer dado, n\u00E3o esque\u00E7a de atualizar as tabelas com o bot\u00E3o \"Atualizar\".");
+		lblNewLabel.setBackground(Color.WHITE);
 		lblNewLabel.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblNewLabel.setForeground(Color.BLACK);
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
