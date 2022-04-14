@@ -53,6 +53,7 @@ public class MainUI extends JFrame {
 	JComboBox<Veiculo> comboVeiculo = new JComboBox();
 	
 	List<Chamado> listaChamado = new ArrayList<Chamado>();
+	private JTextField txtEmissao;
 	
 	/**
 	 * Launch the application.
@@ -213,13 +214,17 @@ public class MainUI extends JFrame {
 			}
 		});
 		
-		JButton btnCalcular = new JButton("Calcular Emiss\u00E3o CO2");
-		btnCalcular.setVisible(false);
+		JLabel lblEmissao = new JLabel("Emiss\u00E3o de CO2 deste chamado: ");
+		txtEmissao = new JTextField();
+		txtEmissao.setColumns(10);
+		lblEmissao.setVisible(false);
+		txtEmissao.setVisible(false);
 		
 		JButton btnAtualizar = new JButton("Atualizar");
 		btnAtualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				btnCalcular.setVisible(false);
+				lblEmissao.setVisible(false);
+				txtEmissao.setVisible(false);
 				DefaultComboBoxModel<Funcionario> modelFuncionario = new DefaultComboBoxModel();
 				for(Funcionario funcionario : new FuncionarioController().listar()) {
 					if(funcionario.getHabilitado() == true) {
@@ -256,6 +261,7 @@ public class MainUI extends JFrame {
 				dispose();
 			}
 		});
+
 		
 		JScrollPane scrollPane = new JScrollPane();
 		
@@ -267,15 +273,12 @@ public class MainUI extends JFrame {
 		jtChamado.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				btnCalcular.setVisible(true);
-			}
-		});
-		btnCalcular.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {	
 				Chamado chamado = new ChamadoTableModel(new ChamadoController().listar()).get(jtChamado.getSelectedRow());
 				final DecimalFormat df = new DecimalFormat("0.00");
 				Double emissao = calcularEmissao(chamado);
-				JOptionPane.showMessageDialog(null, "Emissão total do Chamado número " + chamado.getId() + " do Funcionário " + chamado.getFuncionario().getNome() + " de distância " + chamado.getDistancia() + " Km foi de " + df.format(emissao) + " KG");
+				txtEmissao.setText(df.format(emissao).toString() + " Kg");
+				lblEmissao.setVisible(true);
+				txtEmissao.setVisible(true);
 			}
 		});
 		
@@ -283,6 +286,9 @@ public class MainUI extends JFrame {
 		lblNewLabel.setBackground(Color.WHITE);
 		lblNewLabel.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblNewLabel.setForeground(Color.BLACK);
+		
+
+		
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
@@ -309,10 +315,12 @@ public class MainUI extends JFrame {
 							.addComponent(btnAtualizar)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(btnExcluir)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(lblEmissao)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnCalcular)
-							.addPreferredGap(ComponentPlacement.RELATED, 210, Short.MAX_VALUE)
-							.addComponent(btnSair, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE))
+							.addComponent(txtEmissao, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+							.addComponent(btnSair, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE))
 						.addComponent(scrollPane, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 670, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblNewLabel))
 					.addContainerGap())
@@ -344,10 +352,11 @@ public class MainUI extends JFrame {
 						.addComponent(btnEditar)
 						.addComponent(btnAtualizar)
 						.addComponent(btnExcluir)
-						.addComponent(btnCalcular))
+						.addComponent(lblEmissao)
+						.addComponent(txtEmissao, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblNewLabel)
-					.addGap(27))
+					.addGap(23))
 		);
 
 		scrollPane.setViewportView(jtChamado);
